@@ -26,6 +26,9 @@ keys.addEventListener('click', e => {
     ) {
       console.log('operator key!');
     } else if (action === 'decimal') {
+      if (!displayedNum.includes('.')) {
+        display.textContent = displayedNum + '.';
+      }
       console.log('decimal!');
     } else if (action === 'clear') {
       console.log('clear!');
