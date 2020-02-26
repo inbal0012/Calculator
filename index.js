@@ -54,3 +54,24 @@ keys.addEventListener('click', e => {
     }
   }
 });
+
+const calculate = (firstValue, operator, secondValue) => {
+  switch (operator) {
+    case 'add':
+      result = firstValue + secondValue;
+      break;
+    case 'subtract':
+      result = firstValue - secondValue;
+      break;
+    case 'multiply':
+      result = firstValue * secondValue;
+      break;
+    case 'divide':
+      result = firstValue / secondValue;
+      break;
+
+    default:
+      break;
+  }
+  return result;
+};
