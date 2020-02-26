@@ -32,6 +32,9 @@ keys.addEventListener('click', e => {
       action === 'divide'
     ) {
       key.classList.add('is-depressed');
+      calculator.dataset.previousKeyType = 'operator';
+      calculator.dataset.firstValue = displayedNum;
+      calculator.dataset.operator = action;
       console.log('operator key!');
     } else if (action === 'decimal') {
       if (!displayedNum.includes('.')) {
@@ -41,6 +44,11 @@ keys.addEventListener('click', e => {
     } else if (action === 'clear') {
       console.log('clear!');
     } else if (action === 'calculate') {
+      const firstValue = calculator.dataset.firstValue;
+      const operator = calculator.dataset.operator;
+      const secondValue = displayedNum;
+
+      display.textContent = calculate(firstValue, operator, secondValue);
       console.log('= clicked');
     }
   }
