@@ -9,6 +9,11 @@ keys.addEventListener('click', e => {
     const keyContent = key.textContent;
     let displayedNum = display.textContent;
 
+    // Remove .is-depressed class from all keys
+    Array.from(key.parentNode.children).forEach(k =>
+      k.classList.remove('is-depressed')
+    );
+
     if (!action) {
       if (displayedNum === '0') {
         display.textContent = keyContent;
@@ -24,12 +29,13 @@ keys.addEventListener('click', e => {
       action === 'multiply' ||
       action === 'divide'
     ) {
+      key.classList.add('is-depressed');
       console.log('operator key!');
     } else if (action === 'decimal') {
       if (!displayedNum.includes('.')) {
         display.textContent = displayedNum + '.';
+        console.log('decimal!');
       }
-      console.log('decimal!');
     } else if (action === 'clear') {
       console.log('clear!');
     } else if (action === 'calculate') {
