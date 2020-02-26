@@ -22,7 +22,6 @@ keys.addEventListener('click', e => {
       } else {
         display.textContent = displayedNum + keyContent;
       }
-      console.log('number key! ' + keyContent);
     }
 
     if (
@@ -35,22 +34,24 @@ keys.addEventListener('click', e => {
       calculator.dataset.previousKeyType = 'operator';
       calculator.dataset.firstValue = displayedNum;
       calculator.dataset.operator = action;
-      console.log('operator key!');
     } else if (action === 'decimal') {
       if (!displayedNum.includes('.')) {
         display.textContent = displayedNum + '.';
-        console.log('decimal!');
       }
     } else if (action === 'clear') {
+      calculator.dataset.previousKeyType = '';
+      calculator.dataset.firstValue = 0;
+      calculator.dataset.operator = '';
+      display.textContent = '0';
       console.log('clear!');
     } else if (action === 'calculate') {
       const firstValue = calculator.dataset.firstValue;
       const operator = calculator.dataset.operator;
       const secondValue = displayedNum;
-
-      display.textContent = calculate(firstValue, operator, secondValue);
-
-      console.log('= clicked');
+      if (operator) {
+        display.textContent = calculate(firstValue, operator, secondValue);
+        console.log(firstValue + ' ' + operator + ' ' + secondValue);
+      }
     }
   }
 });
@@ -67,7 +68,11 @@ const calculate = (firstValue, operator, secondValue) => {
       result = firstValue * secondValue;
       break;
     case 'divide':
-      result = firstValue / secondValue;
+      if (secondValue === '0') {
+        result = "can't divide by zero";
+      } else {
+        result = firstValue / secondValue;
+      }
       break;
 
     default:
