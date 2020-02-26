@@ -14,8 +14,10 @@ keys.addEventListener('click', e => {
       k.classList.remove('is-depressed')
     );
 
+    const previousKeyType = calculator.dataset.previousKeyType;
+
     if (!action) {
-      if (displayedNum === '0') {
+      if (displayedNum === '0' || previousKeyType === 'operator') {
         display.textContent = keyContent;
       } else {
         display.textContent = displayedNum + keyContent;
